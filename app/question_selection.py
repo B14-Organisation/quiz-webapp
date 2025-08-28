@@ -1,6 +1,6 @@
 from random import choice, sample, shuffle
 from typing import Any, Dict, List
-
+import streamlit as st
 
 class QuestionSelector:
     @classmethod
@@ -8,29 +8,33 @@ class QuestionSelector:
         cls, question_list: List[Dict[str, Any]], config: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         method = config["question_selection_method"]
-        group_coupled_questions = config["group_coupled_questions"]
-        shuffle_questions = config["shuffle_questions"]
+        if st.session_state.get("group_coupled_questions", None) is None:
+            st.session_state["group_coupled_questions"] = config["group_coupled_questions"]
+        if st.session_state.get("shuffle_questions", None) is None:
+            st.session_state["shuffle_questions"] = config["shuffle_questions"]
+
         match method:
             case "all":
                 question_list = cls._select_all_questions(
-                    question_list, group_coupled_questions
+                    question_list, st.session_state["group_coupled_questions"]
                 )
             case "list":
                 question_indices = method["question_indices"]
                 question_list = cls._select_list_questions(
-                    question_list, question_indices, group_coupled_questions
+                    question_list, question_indices, st.session_state["group_coupled_questions"]
                 )
             case "random":
-                question_amount = config["question_selection_methods"][method][
+                if st.session_state.get("question_amount", None) is None:
+                    st.session_state["question_amount"] = config["question_selection_methods"][method][
                     "question_amount"
-                ]
+                    ]
                 question_list = cls._select_random_questions(
-                    question_list, question_amount, group_coupled_questions
+                    question_list, st.session_state["question_amount"], st.session_state["group_coupled_questions"]
                 )
             case _:
                 raise ValueError(f"Invalid question selection method: {method}")
 
-        if shuffle_questions:
+        if st.session_state["shuffle_questions"]:
             shuffle(question_list)
         else:
             question_list = sorted(question_list, key=lambda q: q['index'])

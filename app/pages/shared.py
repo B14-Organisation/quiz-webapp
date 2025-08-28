@@ -142,7 +142,7 @@ def render_back_to_home_button():
         if st.session_state["state"] == QuizState.RESULT
         else "secondary",
     ):
-        if st.session_state["state"] == QuizState.RESULT:
+        if st.session_state["state"] in [QuizState.RESULT, QuizState.SETTINGS]:
             reset()
         else:
             back_to_home_dialog()

@@ -22,6 +22,11 @@ def render_init():
             break
     st.divider()
 
+    if st.button(Localization.get("settings")):
+        st.session_state["state"] = QuizState.SETTINGS
+        scroll_to_top()
+        st.rerun()
+        
     left_column, right_column = st.columns(spec=[0.9, 0.1])
 
     with left_column:
