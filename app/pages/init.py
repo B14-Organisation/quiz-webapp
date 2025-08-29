@@ -7,9 +7,18 @@ from app.state import QuizState
 
 
 def render_init():
-    st.header(
-        Localization.get("intro").format(number=len(st.session_state["questions"]))
-    )
+    left_column_header, right_column_header = st.columns(spec=[0.9, 0.1])
+
+    with left_column_header:
+        st.header(
+            Localization.get("intro").format(number=len(st.session_state["questions"]))
+        )
+    with right_column_header:
+        if st.button("", icon=":material/settings:"):
+            st.session_state["state"] = QuizState.SETTINGS
+            scroll_to_top()
+            st.rerun()
+        
     st.divider()
     for i in count():
         png_filename = f"title{i}_{Localization.language()}.png"
@@ -21,7 +30,7 @@ def render_init():
         else:
             break
     st.divider()
-
+        
     left_column, right_column = st.columns(spec=[0.9, 0.1])
 
     with left_column:

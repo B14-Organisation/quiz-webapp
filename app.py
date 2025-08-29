@@ -5,6 +5,7 @@ from app.pages.question import render_question
 from app.pages.solution import render_solution
 from app.pages.result import render_result
 from app.pages.shared import render_back_to_home_button
+from app.pages.settings import render_settings
 from app.state import QuizState
 
 
@@ -22,6 +23,9 @@ if current_question is not None:
 
     elif st.session_state["state"] == QuizState.RESULT:
         render_result()
+
+    elif st.session_state["state"] == QuizState.SETTINGS:
+        render_settings()
 
     if st.session_state["state"] != QuizState.INIT:
         render_back_to_home_button()

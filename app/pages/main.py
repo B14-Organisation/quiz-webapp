@@ -71,8 +71,8 @@ def render_main() -> Question | None:
         with open(os.path.join("data", "config.json"), "r") as file:
             config = json.load(file)
 
+        st.session_state["num_questions_available"] = len(question_list)
         question_list = QuestionSelector.select_questions(question_list, config)
-
         st.session_state["question_index"] = 0
         st.session_state["questions"] = Question.many_from_dict(question_list)
         st.session_state["max_points"] = Question.get_max_points(
