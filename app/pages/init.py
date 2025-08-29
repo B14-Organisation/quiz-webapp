@@ -22,7 +22,7 @@ def render_init():
             break
     st.divider()
 
-    if st.button(Localization.get("settings")):
+    if st.button("", icon=":material/settings:"):
         st.session_state["state"] = QuizState.SETTINGS
         scroll_to_top()
         st.rerun()
