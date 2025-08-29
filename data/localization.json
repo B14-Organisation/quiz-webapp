@@ -95,16 +95,15 @@
         "de": "Quiz - {number} Fragen",
         "en": "Quiz - {number} questions"
     },
-    "settings": {
-        "de": "erweiterte Einstellungen",
-        "en": "advanced settings"
-    },"group_coupled_questions": {
+    "group_coupled_questions": {
         "de": "zusammengehörige Fragen nur als Gruppe auswählen",
         "en": "choose coupled questions only as a group"
-    }, "question_amount": {
+    }, 
+    "question_amount": {
         "de": "Anzahl der Fragen",
         "en": "number of questions"
-    }, "shuffle_questions": {
+    }, 
+    "shuffle_questions": {
         "de": "Fragen mischen",
         "en": "shuffle questions"
     }
