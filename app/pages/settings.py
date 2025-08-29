@@ -6,7 +6,7 @@ def render_settings():
     st.session_state["question_amount"] = st.slider(
         Localization.get("question_amount"), 
         min_value=1, 
-        max_value=10, 
+        max_value=st.session_state["num_questions_available"], 
         value=st.session_state["question_amount"]
     )
     st.session_state["group_coupled_questions"]  = st.checkbox(
